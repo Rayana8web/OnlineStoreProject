@@ -1,0 +1,16 @@
+{% load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Добавить комментарий</title>
+</head>
+<body>
+    <h1>Добавить комментарий к "{{ ad.title }}"</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+    <a href="{% url 'ad_detail' ad.pk %}">Вернуться к объявлению</a>
+</body>
+</html>

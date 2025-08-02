@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5" style="background: linear-gradient(135deg, #fdfbfb, #ebedee); min-height: 90vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4 text-primary">Вход в систему</h2>
+
+                        {% if messages %}
+                        <div class="mb-3">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form method="post" action=".">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="id_email" class="form-label">Почта</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_password" class="form-label">Пароль</label>
+                                {{ form.password }}
+                                {% if form.password.errors %}
+                                    <div class="text-danger small">{{ form.password.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 rounded-pill">Войти</button>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            Нет аккаунта?
+                            <a href="{% url 'register' %}" class="text-decoration-none text-primary">Зарегистрироваться</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
